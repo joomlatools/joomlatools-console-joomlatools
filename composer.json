@@ -1,0 +1,17 @@
+{
+  "name": "joomlatools/joomla-console-joomlatools",
+  "license": "MPLv2",
+  "description": "",
+  "homepage": "https://github.com/joomlatools/joomla-console-joomlatools",
+  "type": "joomla-console-plugin",
+  "authors": [
+    {
+      "name": "Joomlatools",
+      "email": "info@joomlatools.com",
+      "homepage": "https://www.joomlatools.com"
+    }
+  ],
+  "autoload": {
+    "files": ["symlinker.php"]
+  }
+}
