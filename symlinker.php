@@ -1,6 +1,7 @@
 <?php
 
 use Joomlatools\Console\Command\ExtensionSymlink;
+use Joomlatools\Console\Joomla\Util;
 
 $dependencies = array(
     'joomlatools-framework' => array('nooku-framework'),
@@ -21,7 +22,7 @@ ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $pro
     // If we are symlinking Koowa, we need to create this structure to allow multiple symlinks in them
     if (array_intersect(array('nooku-framework', 'joomlatools-framework', 'koowa'), $projects))
     {
-        $dirs = array($destination.'/libraries/koowa/components', $destination.'/media/koowa');
+        $dirs = array(Util::buildTargetPath('/libraries/koowa/components', $destination), Util::buildTargetPath('/media/koowa', $destination));
         foreach ($dirs as $dir)
         {
             if (!is_dir($dir)) {
@@ -57,7 +58,7 @@ ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $pro
     }
 
     $media_source      = $project.'/code/resources/assets';
-    $media_destination = $destination.'/media/koowa/framework';
+    $media_destination = Util::buildTargetPath('/media/koowa/framework', $destination);
 
     if (!file_exists($media_destination)) {
         `ln -sf $media_source $media_destination`;
@@ -78,7 +79,7 @@ ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $pro
     $xml       = simplexml_load_file($project.'/koowa-component.xml');
     $component = 'com_'.$xml->name;
 
-    $code_destination = $destination.'/libraries/koowa/components/'.$component;
+    $code_destination = Util::buildTargetPath('/libraries/koowa/components/'.$component, $destination);
 
     if (!file_exists($code_destination)) {
         `ln -sf $project $code_destination`;
@@ -86,7 +87,7 @@ ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $pro
 
     // Special treatment for media files
     $media = $project.'/resources/assets';
-    $target = $destination.'/media/koowa/'.$component;
+    $target = Util::buildTargetPath('/media/koowa/'.$component, $destination);
 
     if (is_dir($media) && !file_exists($target)) {
         `ln -sf $media $target`;
