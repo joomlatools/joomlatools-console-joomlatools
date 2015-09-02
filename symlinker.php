@@ -1,6 +1,6 @@
 <?php
 
-use Joomlatools\Console\Command\ExtensionSymlink;
+use Joomlatools\Console\Command\Extension;
 use Joomlatools\Console\Joomla\Util;
 
 $dependencies = array(
@@ -12,13 +12,13 @@ $dependencies = array(
 );
 
 foreach ($dependencies as $project => $deps) {
-    ExtensionSymlink::registerDependencies($project, $deps);
+    Extension\Symlink::registerDependencies($project, $deps);
 }
 
 /**
  * Nooku Framework custom symlinker
  */
-ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $projects) {
+Extension\Symlink::registerSymlinker(function($project, $destination, $name, $projects) {
     // If we are symlinking Koowa, we need to create this structure to allow multiple symlinks in them
     if (array_intersect(array('nooku-framework', 'joomlatools-framework', 'koowa'), $projects))
     {
@@ -71,7 +71,7 @@ ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $pro
 /**
  * Nooku components custom symlinker
  */
-ExtensionSymlink::registerSymlinker(function($project, $destination, $name, $projects) {
+Extension\Symlink::registerSymlinker(function($project, $destination, $name, $projects) {
     if (!is_file($project.'/koowa-component.xml')) {
         return false;
     }
