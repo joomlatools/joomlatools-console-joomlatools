@@ -66,32 +66,3 @@ Extension\Symlink::registerSymlinker(function($project, $destination, $name, $pr
 
     return true;
 });
-
-
-/**
- * Nooku components custom symlinker
- */
-Extension\Symlink::registerSymlinker(function($project, $destination, $name, $projects) {
-    if (!is_file($project.'/koowa-component.xml')) {
-        return false;
-    }
-
-    $xml       = simplexml_load_file($project.'/koowa-component.xml');
-    $component = 'com_'.$xml->name;
-
-    $code_destination = Util::buildTargetPath('/libraries/koowa/components/'.$component, $destination);
-
-    if (!file_exists($code_destination)) {
-        `ln -sf $project $code_destination`;
-    }
-
-    // Special treatment for media files
-    $media = $project.'/resources/assets';
-    $target = Util::buildTargetPath('/media/koowa/'.$component, $destination);
-
-    if (is_dir($media) && !file_exists($target)) {
-        `ln -sf $media $target`;
-    }
-
-    return true;
-});
