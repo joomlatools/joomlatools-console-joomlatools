@@ -1,5 +1,5 @@
-[Joomlatools Console - Joomlatools plugin]
-=====================
+Joomlatools Console - Joomlatools plugin
+=======================================
 
 A [Joomlatools Console](https://github.com/joomlatools/joomla-console) plugin to automatically manage [Joomlatools](http://www.joomlatools.com) developer dependencies when working on Joomlatools projects.
 
