@@ -19,3 +19,24 @@ Installation
 ## Requirements
 
 * [Joomlatools Console](https://github.com/joomlatools/joomla-console)
+
+## Contributing
+
+The `joomlatools/joomla-console-joomlatools` plugin is an open source, community-driven project. Contributions are welcome from everyone. We have [contributing guidelines](CONTRIBUTING.md) to help you get started.
+
+## Contributors
+
+See the list of [contributors](https://github.com/joomlatools/joomla-console-joomlatools/contributors).
+
+## License
+
+The `joomlatools/joomla-console-joomlatools` plugin is free and open-source software licensed under the [MPLv2 license](LICENSE).
+
+## Community
+
+Keep track of development and community news.
+
+* Follow [@joomlatoolsdev on Twitter](https://twitter.com/joomlatoolsdev)
+* Join [joomlatools/dev on Gitter](http://gitter.im/joomlatools/dev)
+* Read the [Joomlatools Developer Blog](http://developer.joomlatools.com/blog/)
+* Subscribe to the [Joomlatools Developer Newsletter](http://developer.joomlatools.com/newsletter)
