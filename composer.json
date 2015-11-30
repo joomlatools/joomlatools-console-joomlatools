@@ -1,9 +1,9 @@
 {
-  "name": "joomlatools/joomla-console-joomlatools",
+  "name": "joomlatools/console-joomlatools",
   "license": "MPLv2",
   "description": "",
-  "homepage": "https://github.com/joomlatools/joomla-console-joomlatools",
-  "type": "joomla-console-plugin",
+  "homepage": "https://github.com/joomlatools/joomlatools-console-joomlatools",
+  "type": "joomlatools-console-plugin",
   "authors": [
     {
       "name": "Joomlatools",
