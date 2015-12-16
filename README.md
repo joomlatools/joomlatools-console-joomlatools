@@ -1,10 +1,8 @@
-Joomlatools Console - Joomlatools plugin
-=======================================
+# Joomlatools Console - Joomlatools plugin
 
 A [Joomlatools Console](https://github.com/joomlatools/joomlatools-console) plugin to automatically manage [Joomlatools](http://www.joomlatools.com) developer dependencies when working on Joomlatools projects.
 
-Installation
-------------
+## Installation
 
 * Run the following command
 
@@ -15,6 +13,10 @@ Installation
 	`$ joomla plugin:list`
 
 * The plugin will automatically take care of Joomlatools development dependencies for you when symlinking projects. More info can be found at the [Timble Playbook](http://www.timble.net/playbook/#joomlatools-development).
+
+## Commands 
+
+* `language:key`: generate language keys from given strings for use with the Joomlatools Framework.
 
 ## Requirements
 
