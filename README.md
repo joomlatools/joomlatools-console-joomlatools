@@ -1,6 +1,6 @@
 # Joomlatools Console - Joomlatools plugin
 
-A [Joomlatools Console](https://github.com/joomlatools/joomlatools-console) plugin to automatically manage [Joomlatools](http://www.joomlatools.com) developer dependencies when working on Joomlatools projects.
+A [Joomlatools Console](http://www.joomlatools.com/developer/tools/console/) plugin to automatically manage [Joomlatools](http://www.joomlatools.com) developer dependencies when working on Joomlatools projects.
 
 ## Installation
 
@@ -40,5 +40,5 @@ Keep track of development and community news.
 
 * Follow [@joomlatoolsdev on Twitter](https://twitter.com/joomlatoolsdev)
 * Join [joomlatools/dev on Gitter](http://gitter.im/joomlatools/dev)
-* Read the [Joomlatools Developer Blog](http://developer.joomlatools.com/blog/)
-* Subscribe to the [Joomlatools Developer Newsletter](http://developer.joomlatools.com/newsletter)
+* Read the [Joomlatools Developer Blog](http://www.joomlatools.com/developer/blog/)
+* Subscribe to the [Joomlatools Developer Newsletter](http://www.joomlatools.com/developer/newsletter/)
