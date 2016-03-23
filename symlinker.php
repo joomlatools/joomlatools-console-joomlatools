@@ -6,11 +6,11 @@ use Joomlatools\Console\Joomla\Util;
 use Symfony\Component\Console\Output\OutputInterface;
 
 $dependencies = array(
-    'joomlatools-framework' => array('nooku-framework'),
-    'extman'  => array('joomlatools-framework'),
-    'docman'  => array('extman', 'com_files'),
-    'fileman' => array('extman', 'com_files'),
-    'logman'  => array('extman', 'com_activities')
+    'joomlatools-framework' => array('com_files', 'com_activities', 'com_scheduler', 'com_migrator'),
+    'docman' => array('joomlatools-framework'),
+    'fileman' => array('joomlatools-framework'),
+    'logman' => array('joomlatools-framework'),
+    'textman' => array('joomlatools-framework', 'com_ckeditor')
 );
 
 foreach ($dependencies as $project => $deps) {
@@ -21,69 +21,47 @@ foreach ($dependencies as $project => $deps) {
  * Nooku Framework custom symlinker
  */
 Extension\Symlink::registerSymlinker(function($project, $destination, $name, $projects, OutputInterface $output) {
-    // If we are symlinking Koowa, we need to create this structure to allow multiple symlinks in them
-    if (array_intersect(array('nooku-framework', 'joomlatools-framework', 'koowa'), $projects))
-    {
-        $dirs = array(Util::buildTargetPath('/libraries/koowa/components', $destination), Util::buildTargetPath('/media/koowa', $destination));
-        foreach ($dirs as $dir)
-        {
-            if (!is_dir($dir))
-            {
-                if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                    $output->writeln(" * creating empty directory `$dir`");
-                }
-
-                mkdir($dir, 0777, true);
-            }
-        }
-    }
-
-    if (!is_file($project.'/code/koowa.php')) {
+    if (!is_file($project.'/composer.json')) {
         return false;
     }
 
-    if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-        $output->writeln("Symlinking `" . basename($project) . "` into `$destination`");
+    $manifest = json_decode(file_get_contents($project.'/composer.json'));
+
+    if (!isset($manifest->name) || $manifest->name != 'joomlatools/joomlatools-framework') {
+        return false;
     }
 
-    $vendor_path = $destination.'/vendor';
+    // build the folders to symlink into
+    $dirs = array(
+        Util::buildTargetPath('/libraries/joomlatools/component', $destination),
+        Util::buildTargetPath('/media/koowa', $destination)
+    );
 
-    if(file_exists($destination.'/composer.json'))
+    foreach ($dirs as $dir)
     {
-        $content  = file_get_contents($destination.'/composer.json');
-        $composer = json_decode($content);
+        if (!is_dir($dir))
+        {
+            if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                $output->writeln(" * creating empty directory `$dir`");
+            }
 
-        if(isset($composer->config->{'vendor-dir'})) {
-            $vendor_path = $destination.'/'.$composer->config->{'vendor-dir'};
+            mkdir($dir, 0777, true);
         }
     }
 
-    $code_destination = $vendor_path.'/nooku/nooku-framework';
+    // Special treatment for media files
+    $media = $project.'/code/libraries/joomlatools/component/koowa/resources/assets';
+    $target = Util::buildTargetPath('/media/koowa/com_koowa', $destination);
 
-    if (!is_dir(dirname($code_destination))) {
-        mkdir(dirname($code_destination), 0777, true);
-    }
-
-    if (!file_exists($code_destination))
-    {
-        if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->writeln(" * creating link `$code_destination` -> `$project`");
-        }
-
-        `ln -sf $project $code_destination`;
-    }
-
-    $media_source      = $project.'/code/resources/assets';
-    $media_destination = Util::buildTargetPath('/media/koowa/framework', $destination);
-
-    if (!file_exists($media_destination))
+    if (is_dir($media) && !file_exists($target))
     {
         if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->writeln(" * creating link `$media_destination` -> `$media_source`");
+            $output->writeln(" * creating link `$target` -> $media");
         }
 
-        `ln -sf $media_source $media_destination`;
+        `ln -sf $media $target`;
     }
 
-    return true;
+    // Let the default symlinker handle the rest
+    return false;
 });
