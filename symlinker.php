@@ -27,7 +27,7 @@ Extension\Symlink::registerSymlinker(function($project, $destination, $name, $pr
 
     $manifest = json_decode(file_get_contents($project.'/composer.json'));
 
-    if (!isset($manifest->name) || $manifest->name != 'joomlatools/joomlatools-framework') {
+    if (!isset($manifest->name) || $manifest->name != 'joomlatools/framework') {
         return false;
     }
 
