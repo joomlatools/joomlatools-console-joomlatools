@@ -6,11 +6,11 @@ use Joomlatools\Console\Joomla\Util;
 use Symfony\Component\Console\Output\OutputInterface;
 
 $dependencies = array(
-    'joomlatools-framework' => array('com_files', 'com_activities', 'com_scheduler', 'com_migrator'),
-    'docman' => array('joomlatools-framework'),
-    'fileman' => array('joomlatools-framework'),
-    'logman' => array('joomlatools-framework'),
-    'textman' => array('joomlatools-framework', 'com_ckeditor')
+    'framework' => array('framework-files', 'framework-activities', 'framework-scheduler', 'framework-migrator'),
+    'docman' => array('framework'),
+    'fileman' => array('framework'),
+    'logman' => array('framework'),
+    'textman' => array('framework', 'framework-ckeditor')
 );
 
 foreach ($dependencies as $project => $deps) {
