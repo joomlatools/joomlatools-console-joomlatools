@@ -6,6 +6,8 @@ use Joomlatools\Console\Joomla\Util;
 use Symfony\Component\Console\Output\OutputInterface;
 
 $dependencies = array(
+    'extman' => array('nooku-framework', 'com_files', 'com_activities'), // deprecated
+
     'framework' => array('framework-files', 'framework-activities', 'framework-scheduler', 'framework-migrator'),
     'docman' => array('framework'),
     'fileman' => array('framework'),
