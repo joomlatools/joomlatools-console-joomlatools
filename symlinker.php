@@ -51,17 +51,24 @@ Extension\Symlink::registerSymlinker(function($project, $destination, $name, $pr
         }
     }
 
-    // Special treatment for media files
-    $media = $project.'/code/libraries/joomlatools/component/koowa/resources/assets';
-    $target = Util::buildTargetPath('/media/koowa/com_koowa', $destination);
+    /*
+     * Special treatment for media files
+     */
+    $media = array(
+        $project.'/code/libraries/joomlatools/component/koowa/resources/assets' => Util::buildTargetPath('/media/koowa/com_koowa', $destination),
+        $project.'/code/libraries/joomlatools/library/resources/assets' => Util::buildTargetPath('/media/koowa/framework', $destination),
+    );
 
-    if (is_dir($media) && !file_exists($target))
+    foreach ($media as $from => $to)
     {
-        if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $output->writeln(" * creating link `$target` -> $media");
-        }
+        if (is_dir($from) && !file_exists($to))
+        {
+            if ($output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
+                $output->writeln(" * creating link `$to` -> $from");
+            }
 
-        `ln -sf $media $target`;
+            `ln -sf $from $to`;
+        }
     }
 
     // Let the default symlinker handle the rest
