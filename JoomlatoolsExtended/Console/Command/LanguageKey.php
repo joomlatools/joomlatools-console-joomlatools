@@ -45,7 +45,7 @@ class LanguageKey extends Site\AbstractSite
             throw new \RuntimeException(sprintf('Site not found: %s', $this->site));
         }
 
-        if (!is_dir($this->target_dir.'/libraries/koowa/')) {
+        if (!is_dir($this->target_dir.'/libraries/joomlatools/')) {
             throw new \RuntimeException(sprintf('Koowa is not installed on site: %s', $this->site));
         }
     }
