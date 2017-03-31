@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LanguageKey extends Site\AbstractSite
+class ConnectToken extends Site\AbstractSite
 {
     protected function configure()
     {
