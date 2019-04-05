@@ -14,6 +14,7 @@ $dependencies = array(
     ),
     'docman' => array('joomlatools-framework'),
     'fileman' => array('joomlatools-framework'),
+    'leadman' => array('joomlatools-framework', 'joomlatools-framework-ckeditor'),
     'logman' => array('joomlatools-framework'),
     'textman' => array('joomlatools-framework', 'joomlatools-framework-ckeditor')
 );
